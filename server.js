@@ -728,7 +728,7 @@ for (let attempt = 0; attempt < 4; attempt++) {
 // START SERVER
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, async () => {
-    console.log(`PlacementPulse running at http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", async () => {
+    console.log(`PlacementPulse running on port ${PORT}`);
     await checkDatabase();
 });
