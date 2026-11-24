@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlacementPulse | Career Readiness Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- AUTHENTICATION -->
+<section id="authSection" class="auth-wrapper">
+    <div class="auth-brand">
+        <div class="brand-logo">P</div>
+        <h1>Placement<span>Pulse</span></h1>
+        <p>Your journey from student to professional starts here.</p>
+    </div>
+
+    <div class="auth-card">
+        <div class="auth-tabs">
+            <button id="registerTab" class="tab active" onclick="switchAuth('register')">
+                Create Account
+            </button>
+            <button id="loginTab" class="tab" onclick="switchAuth('login')">
+                Login
+            </button>
+        </div>
+
+        <form id="registerForm">
+            <h2>Create your account</h2>
+            <p class="muted">Start preparing for your career today.</p>
+
+            <label for="registerName">Full name</label>
+            <input type="text" id="registerName" placeholder="Enter your full name" required>
+
+            <label for="registerEmail">Email address</label>
+            <input type="email" id="registerEmail" placeholder="Enter your email" required>
+
+            <label for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" placeholder="At least 6 characters" minlength="6" required>
+
+            <button type="submit" class="primary-btn">Create Account</button>
+        </form>
+
+        <form id="loginForm" class="hidden">
+            <h2>Welcome back!</h2>
+            <p class="muted">Log in to continue your preparation.</p>
+
+            <label for="loginEmail">Email address</label>
+            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+            <button type="submit" class="primary-btn">Login to Dashboard</button>
+        </form>
+
+        <p id="authMessage" class="message"></p>
+    </div>
+</section>
+
+
+<!-- APPLICATION -->
+<div id="appLayout" class="app-layout hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-logo small-logo">P</div>
+            <h2>Placement<span>Pulse</span></h2>
+        </div>
+
+        <p class="menu-heading">WORKSPACE</p>
+
+        <button class="nav-btn active" data-page="dashboard">
+            <span>▦</span> Dashboard
+        </button>
+
+        <button class="nav-btn" data-page="dsa">
+            <span>⌘</span> DSA Tracker
+        </button>
+
+        <button class="nav-btn" data-page="aptitude">
+            <span>◉</span> Aptitude Practice
+        </button>
+
+        <button class="nav-btn" data-page="resume">
+            <span>▤</span> Resume Analyzer
+        </button>
+
+        <button class="nav-btn" data-page="career">
+            <span>✧</span> Career Guidance
+        </button>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-user">
+                <div class="avatar" id="userAvatar">S</div>
+                <div>
+                    <strong id="sidebarName">Student</strong>
+                    <small>Student account</small>
+                </div>
+            </div>
+
+            <button id="logoutButton" class="logout-btn">
+                ↪ Logout
+            </button>
+        </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="topbar-label">STUDENT WORKSPACE</p>
+                <h2 id="pageHeading">Dashboard</h2>
+            </div>
+
+            <div class="topbar-user">
+                <div>
+                    <strong id="studentName">Student</strong>
+                    <small>Career readiness</small>
+                </div>
+                <div class="avatar">S</div>
+            </div>
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page">
+            <div class="welcome-banner">
+                <div>
+                    <p class="eyebrow">YOUR CAREER JOURNEY</p>
+                    <h1>Welcome, <span id="welcomeName">Student</span>!</h1>
+                    <p>Build your skills. Track your progress. Get placement ready.</p>
+                </div>
+                <div class="welcome-symbol">✦</div>
+            </div>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Your overview</h2>
+                    <p>Track your preparation at a glance.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon purple">▦</div>
+                    <p>DSA Questions Solved</p>
+                    <h2 id="totalDSA">0</h2>
+                    <small>Across all topics</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">◉</div>
+                    <p>Aptitude Score</p>
+                    <h2 id="aptitudeDashboard">0%</h2>
+                    <small>Latest quiz result</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <p>DSA Topics Started</p>
+                    <h2 id="topicsStarted">0/7</h2>
+                    <small>Topics with progress</small>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>DSA learning progress</h3>
+                            <p>Your topic-wise preparation</p>
+                        </div>
+                        <button class="text-btn" data-goto="dsa">View tracker →</button>
+                    </div>
+
+                    <div id="dashboardProgress" class="progress-list">
+                        <p class="muted">Loading your progress...</p>
+                    </div>
+                </div>
+
+                <div class="panel quick-panel">
+                    <h3>Quick actions</h3>
+                    <p>Continue building your placement readiness.</p>
+
+                    <button class="quick-action" data-goto="dsa">
+                        <span class="quick-icon purple">⌘</span>
+                        <span><strong>Update DSA progress</strong><small>Track solved questions</small></span>
+                        <span>→</span>
+                    </button>
+
+                    <button class="quick-action" data-goto="aptitude">
+                        <span class="quick-icon blue">◉</span>
+                        <span><strong>Practice aptitude</strong><small>Test your problem-solving</small></span>
+                        <span>→</span>
+                    </button>
+
+                    <button class="quick-action" data-goto="resume">
+                        <span class="quick-icon green">▤</span>
+                        <span><strong>Analyze your resume</strong><small>Check important keywords</small></span>
+                        <span>→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- DSA TRACKER -->
+        <section id="dsa" class="page hidden">
+            <div class="page-intro">
+                <h1>DSA Progress Tracker</h1>
+                <p>Record the number of questions you have solved in each topic.</p>
+            </div>
+
+            <div class="panel">
+                <h3>Update your progress</h3>
+
+                <form id="dsaForm" class="tracker-form">
+                    <div>
+                        <label for="dsaTopic">Select topic</label>
+                        <select id="dsaTopic" required>
+                            <option value="Arrays">Arrays</option>
+                            <option value="Strings">Strings</option>
+                            <option value="Linked Lists">Linked Lists</option>
+                            <option value="Stacks">Stacks</option>
+                            <option value="Queues">Queues</option>
+                            <option value="Trees">Trees</option>
+                            <option value="Graphs">Graphs</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="dsaInput">Questions solved</label>
+                        <input type="number" id="dsaInput" min="0" placeholder="Enter total solved" required>
+                    </div>
+
+                    <button type="submit" class="primary-btn">Save Progress</button>
+                </form>
+
+                <p id="dsaMessage" class="message"></p>
+            </div>
+
+            <div class="panel">
+                <h3>Topic-wise progress</h3>
+                <div id="dsaProgressList" class="progress-list"></div>
+            </div>
+            <!-- DSA QUESTIONS -->
+<div class="panel">
+    <h3>Practice DSA Questions</h3>
+    <p class="muted">Choose questions topic-wise and practise your problem-solving skills.</p>
+
+    <div id="dsaQuestionsList">
+        <p class="muted">Questions will appear here.</p>
+    </div>
+
+<!-- DSA CODING WORKSPACE -->
+<div class="panel hidden" id="codingWorkspace">
+
+    <h3 id="selectedQuestionTitle">Selected Question</h3>
+
+    <p id="selectedQuestionDescription" class="muted"></p>
+
+    <div>
+        <label for="programmingLanguage">Select Language</label>
+        <select id="programmingLanguage">
+            <option value="c">C</option>
+            <option value="python">Python</option>
+        </select>
+    </div>
+
+    <br>
+
+    <label for="codeEditor">Write Your Code</label>
+
+    <textarea
+        id="codeEditor"
+        rows="15"
+        placeholder="Write your C or Python code here..."
+        style="width:100%; font-family:monospace;"
+    ></textarea>
+
+    <br><br>
+
+    <button type="button" class="primary-btn" id="runCodeButton">
+        Run Code
+    </button>
+
+    <button type="button" class="primary-btn" id="submitCodeButton">
+        Submit Solution
+    </button>
+
+    <div id="codeOutput" class="result-area">
+        Output will appear here.
+    </div>
+
+</div>
+</div>
+        </section>
+
+
+        <!-- APTITUDE -->
+        <section id="aptitude" class="page hidden">
+            <div class="page-intro">
+                <h1>Aptitude Practice</h1>
+                <p>Test your quantitative aptitude skills with a quick question.</p>
+            </div>
+
+            <div class="panel quiz-panel">
+                <div class="quiz-label">QUANTITATIVE APTITUDE · QUESTION 1</div>
+                <h2>If 15% of a number is 30, what is the number?</h2>
+
+                <div class="answer-options">
+                    <button class="answer-option" data-answer="150">A. 150</button>
+                    <button class="answer-option" data-answer="200">B. 200</button>
+                    <button class="answer-option" data-answer="250">C. 250</button>
+                    <button class="answer-option" data-answer="300">D. 300</button>
+                </div>
+
+                <p id="quizMessage" class="message"></p>
+                <p id="quizScore">Your latest score: Not attempted</p>
+            </div>
+        </section>
+
+
+        <!-- RESUME ANALYZER -->
+        <section id="resume" class="page hidden">
+            <div class="page-intro">
+                <h1>Resume Analyzer</h1>
+                <p>Check your resume text for commonly expected technical and professional skills.</p>
+            </div>
+
+            <div class="panel">
+                <h3>Upload your resume</h3>
+                <p class="muted">For this prototype, upload a text file (.txt).</p>
+
+                <input type="file" id="resumeFile" accept=".txt">
+
+                <button id="analyzeButton" class="primary-btn">Analyze Resume</button>
+
+                <div id="resumeResult" class="result-area"></div>
+            </div>
+        </section>
+
+
+        <!-- CAREER GUIDANCE -->
+        <section id="career" class="page hidden">
+            <div class="page-intro">
+                <h1>Career Guidance</h1>
+                <p>Explore career paths and the skills commonly required for them.</p>
+            </div>
+
+            <div class="career-grid">
+
+<!-- AI CAREER EXPLORER -->
+<div class="panel career-explorer">
+    <h2>AI Career Explorer</h2>
+    <p>Discover career paths based on your interests and preferences.</p>
+
+    <label for="careerInterest">What subjects or activities interest you?</label>
+    <textarea
+        id="careerInterest"
+        placeholder="Example: I enjoy coding, solving problems, working with AI and building websites..."
+    ></textarea>
+
+    <label for="careerWorkStyle">What type of work do you prefer?</label>
+    <select id="careerWorkStyle">
+        <option value="">Select your preference</option>
+        <option value="Coding and software development">Coding and software development</option>
+        <option value="Data analysis and problem solving">Data analysis and problem solving</option>
+        <option value="Artificial intelligence and research">Artificial intelligence and research</option>
+        <option value="Testing and quality assurance">Testing and quality assurance</option>
+        <option value="A combination of different activities">A combination of different activities</option>
+    </select>
+
+    <label for="careerGoal">What is your current career goal?</label>
+    <select id="careerGoal">
+        <option value="">Select your goal</option>
+        <option value="Get an internship">Get an internship</option>
+        <option value="Prepare for campus placements">Prepare for campus placements</option>
+        <option value="Explore different career options">Explore different career options</option>
+        <option value="Build a long-term career in technology">Build a long-term career in technology</option>
+    </select>
+
+    <button type="button" id="exploreCareerButton" class="primary-btn">
+        Explore My Career Paths
+    </button>
+
+    <div id="careerExplorerResult" class="result-area"></div>
+</div>
+
+                
+        </section>
+
+        <footer class="footer">
+            PlacementPulse · Student Career Readiness Platform
+        </footer>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
